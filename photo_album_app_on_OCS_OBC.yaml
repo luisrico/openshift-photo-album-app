@@ -63,8 +63,13 @@ items:
         - image: karansingh/python-s3-photo-album
           name: photo-album
           env:
+            - name: BUCKET_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: photo-album
+                  key: BUCKET_HOST
             - name: ENDPOINT_URL
-              value: 'https://s3-openshift-storage.apps.ocp42.ceph-s3.com'
+              value: 'https://$(BUCKET_HOST)'
             - name: BUCKET_NAME
               valueFrom:
                 configMapKeyRef:
